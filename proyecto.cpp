@@ -43,7 +43,7 @@ float validarDato() {
 }
 
 int main() {
-    int opcion;
+    int opcion, horasMesas[2],horasSillas[2], MaximaHoras[2]; ////// 0: Carpinteria; 1: Pintura 
     float precioMesa, precioSilla;
     bool estado=true;
     cout << "----------------------------------------------------------------"<<endl;
@@ -79,7 +79,28 @@ int main() {
             break;    
         case 2:
             cout << "---Ingreso de restricciones de produccion seleccionado.---" << endl;
-            //
+            cout << "Ingrese las horas de carpinteria para las mesas: ";
+            horasMesas[0]=validarDato();
+            cout << "----------------------------------------------------------------"<<endl;
+            cout << "Ingrese las horas de carpinteria para las sillas: ";
+            horasSillas[0]=validarDato();
+            cout << "----------------------------------------------------------------"<<endl;
+            cout << "Ingrese las horas maximas de carpinteria: ";
+            MaximaHoras[0]=validarDato();
+            cout << "----------------------------------------------------------------"<<endl;
+            cout << "Ingrese las horas de pintura para las mesas: ";
+            horasMesas[1]=validarDato();
+            cout << "----------------------------------------------------------------"<<endl;
+            cout << "Ingrese las horas de pintura para las sillas: ";
+            horasSillas[1]=validarDato();
+            cout << "----------------------------------------------------------------"<<endl;
+            cout << "Ingrese las horas maximas de pintura: ";
+            MaximaHoras[1]=validarDato();
+            cout << "----------------------------------------------------------------"<<endl;
+            for(int i=0; i<2; i++){
+                cout << "Restricion "<< i << " : " << horasMesas[i] <<"x + "<< horasSillas[i]<<"y <= " << MaximaHoras[i] << endl;
+            }
+            cout << "----------------------------------------------------------------"<<endl;
             break;
         case 3:
             cout << "---Ingreso de la funcion de ganancia seleccionado.---" << endl;    
