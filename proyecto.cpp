@@ -1,35 +1,40 @@
 #include <iostream>
 #include <limits>
+#include <iomanip>
 using namespace std;;
 
 // Funcion para validar la opcion
-int restriccionOpcion(int min, int max, int numero) {
+int restriccionOpcion(int min, int max) {
+    int numero;
     while (true) {
+        cin >> numero;
         if (cin.fail()) { //verifica que la entrada sea un numero
-
             cin.clear(); // Limpia el error de entrada
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Opcion invalida.\n";
+            cout << "Opcion invalida. No es un numero, intentelo nuevamente: ";
         } else if (numero < min || numero > max) {
             // Número fuera de rango
-            std::cout << "Opcion invalida.\n";
+            std::cout << "Opcion invalida. Fuera de rango, ingrese nuevamente: ";
         } else {
             return numero;
         }
     }
 }
 //validacion de datos ingresados
-int validarDato(int numero) {
+float validarDato() {
+    float numero;
     while (true) {
         cin >> numero;
 
         if (cin.fail()) { // No es un número
             cin.clear(); // limpia el error
             cin.ignore(numeric_limits<streamsize>::max(), '\n'); // descarta entrada inválida
-            cout << "No se ingreso un numero.\n";
+            cout << "No se ingreso un numero. Intente otra vez: ";
         }
         else if (numero <= 0) { // No es positivo
-            cout << "El número debe ser positivo.\n";
+            cout << "El numero debe ser positivo. Intente otra vez: ";
+            cin.clear(); // limpia el error
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // descarta entrada inválida
         }
         else {
             return numero; 
@@ -39,41 +44,53 @@ int validarDato(int numero) {
 
 int main() {
     int opcion;
-    cout<< "----------------------------------------------------------------"<<endl;
-    cout<< "------------------------PROYECTO GRUPO 6------------------------"<<endl;
-    cout<< "--------------------PROBLEMA FLAIR FURNITURE---------------------"<<endl;
-    cout<< "----------------------------------------------------------------"<<endl<< endl;
-    cout<< "Ingrese una opción de menu: "<<endl;
-    cout<< "1. Ingreso de precios de venta"<<endl;
-    cout<< "2. Ingreso de restricciones de produccion"<<endl;
-    cout<< "3. Ingreso de la funcion de ganancia (Funcion a maximizar)"<<endl;
-    cout<< "4. Calculo de la socucion optima"<<endl;
-    cout<< "5. Solucion grafica del problema de optimización"<<endl;
-    cout<< "6. Salir del programa"<<endl;
+    float precioMesa, precioSilla;
+    bool estado=true;
+    cout << "----------------------------------------------------------------"<<endl;
+    cout << "------------------------PROYECTO GRUPO 6------------------------"<<endl;
+    cout << "--------------------PROBLEMA FLAIR FURNITURE---------------------"<<endl;
+    cout << "----------------------------------------------------------------"<<endl<< endl;
+
+    do{
+
+    cout << "Ingrese una opcion de menu: "<<endl;
+    cout << "1. Ingreso de precios de venta"<<endl;
+    cout << "2. Ingreso de restricciones de produccion"<<endl;
+    cout << "3. Ingreso de la funcion de ganancia (Funcion a maximizar)"<<endl;
+    cout << "4. Calculo de la socucion optima"<<endl;
+    cout << "5. Solucion grafica del problema de optimizacion"<<endl;
+    cout << "6. Salir del programa"<<endl;
     cout << "Ingrese la opcion que desea: ";
-    cin >> opcion;
-   restriccionOpcion(1,6,opcion);
-    switch(opcion) {
+    opcion = restriccionOpcion(1,6);
+    cout << "----------------------------------------------------------------"<<endl;
+    
+        switch(opcion) {
         case 1:
             cout << "---Ingreso de precios de venta seleccionado.---" << endl;
-            int p1, p2;
-            cout << "Ingrese el precio de las mesas:" << endl;
-            validarDato(p1);
+            cout << "Ingrese el precio de las mesas (en USD):";
+            precioMesa = validarDato();
+            cout << "----------------------------------------------------------------"<<endl;
+            cout << "Ingrese el precio de las sillas (en USD):";
+            precioSilla = validarDato();
+            cout << "----------------------------------------------------------------"<<endl;
+            cout << "El precio de las mesas es de: " << fixed << setprecision(2) << precioMesa << " USD" << endl;
+            cout << "El precio de las sillas es de: " << fixed << setprecision(2) << precioSilla << " USD" << endl;
+            cout << "----------------------------------------------------------------"<<endl;
             break;    
         case 2:
-            cout << "---Ingreso de restricciones de producción seleccionado.---" << endl;
+            cout << "---Ingreso de restricciones de produccion seleccionado.---" << endl;
             //
             break;
         case 3:
-            cout << "---Ingreso de la función de ganancia seleccionado.---" << endl;    
+            cout << "---Ingreso de la funcion de ganancia seleccionado.---" << endl;    
             //            
             break;
         case 4:
-            cout << "---Cálculo de la solución óptima seleccionado.---" << endl;
+            cout << "---Calculo de la solucion óptima seleccionado.---" << endl;
             // 
             break;
         case 5:
-            cout << "---Solución gráfica del problema de optimización seleccionado.---" << endl;  
+            cout << "---Solucion gráfica del problema de optimizacion seleccionado.---" << endl;  
             //            
             break;
         case 6: 
@@ -81,5 +98,6 @@ int main() {
             return 0;
                 
     }
+    } while (estado);
     return 0;
 }
