@@ -104,8 +104,8 @@ int main() {
             break;
         case 3:
             cout << "---Ingreso de la funcion de ganancia seleccionado.---" << endl;    
-            precioMesaEntero = static_cast<int>(precioMesa + 0.5f);
-            precioSillaEntero = static_cast<int>(precioSilla + 0.5f);
+            precioMesaEntero = static_cast<int>(precioMesa + 0.5f); // transforma a enteros para colocar los valores en ecuacion Z
+            precioSillaEntero = static_cast<int>(precioSilla + 0.5f); 
 
             cout<<"Funcion de ganancia: Maximizar Z= "<<precioMesaEntero<<"x1 + "<<precioSillaEntero<<"x2"<<endl;
             break;
