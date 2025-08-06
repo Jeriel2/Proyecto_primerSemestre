@@ -43,9 +43,9 @@ float validarDato() {
 }
 
 int main() {
-    int opcion, horasMesas[2],horasSillas[2], MaximaHoras[2]; ////// 0: Carpinteria; 1: Pintura 
-    float precioMesa, precioSilla;
-    bool estado=true;
+    int opcion, horasMesas[3],horasSillas[3], MaximaHoras[3]; ////// 0: Carpinteria; 1: Pintura 
+    float precioMesa, precioSilla, numMesa, numSilla, GananciaMaxima;
+    bool estado=true,est_op1=false,est_op2=false;
     cout << "----------------------------------------------------------------"<<endl;
     cout << "------------------------PROYECTO GRUPO 6------------------------"<<endl;
     cout << "--------------------PROBLEMA FLAIR FURNITURE---------------------"<<endl;
@@ -76,6 +76,7 @@ int main() {
             cout << "El precio de las mesas es de: " << fixed << setprecision(2) << precioMesa << " USD" << endl;
             cout << "El precio de las sillas es de: " << fixed << setprecision(2) << precioSilla << " USD" << endl;
             cout << "----------------------------------------------------------------"<<endl;
+            est_op1=true;
             break;    
         case 2:
             cout << "---Ingreso de restricciones de produccion seleccionado.---" << endl;
@@ -98,17 +99,34 @@ int main() {
             MaximaHoras[1]=validarDato();
             cout << "----------------------------------------------------------------"<<endl;
             for(int i=0; i<2; i++){
-                cout << "Restricion "<< i << " : " << horasMesas[i] <<"x + "<< horasSillas[i]<<"y <= " << MaximaHoras[i] << endl;
+                cout << "Restricion "<< i+1 << " : " << horasMesas[i] <<"x + "<< horasSillas[i]<<"y <= " << MaximaHoras[i] << endl;
             }
             cout << "----------------------------------------------------------------"<<endl;
+            est_op2=true;
             break;
         case 3:
             cout << "---Ingreso de la funcion de ganancia seleccionado.---" << endl;    
             //            
             break;
         case 4:
-            cout << "---Calculo de la solucion óptima seleccionado.---" << endl;
-            // 
+            cout << "---Calculo de la solucion optima seleccionado.---" << endl;
+            if(est_op1 && est_op2){
+                horasSillas[2]=(horasMesas[1]*horasSillas[0])-(horasMesas[0]*horasSillas[1]);
+                MaximaHoras[2]=(horasMesas[1]*MaximaHoras[0])-(horasMesas[0]*MaximaHoras[1]);
+                cout << horasSillas[2] << endl;
+                cout << MaximaHoras[2] << endl;
+                numSilla=MaximaHoras[2]/horasSillas[2];
+                numMesa=(MaximaHoras[0]-(horasSillas[0]*numSilla))/horasMesas[0];
+                GananciaMaxima=(precioMesa*numMesa)+(precioSilla*numSilla);
+                cout << "Solucion optima" << endl;
+                cout << "No.Sillas: " << numSilla << endl;
+                cout << "No.Mesas: " << numMesa << endl;
+                cout << "Ganancias Maximas: " << GananciaMaxima << " USD" << endl;
+                
+            }else{
+                cout << "Aun no se ha ingresado datos en la opcion 1 o 2" << endl;
+            }
+            cout << "----------------------------------------------------------------"<<endl;
             break;
         case 5:
             cout << "---Solucion gráfica del problema de optimizacion seleccionado.---" << endl;  
