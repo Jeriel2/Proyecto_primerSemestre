@@ -1,7 +1,7 @@
 #include <iostream>
 #include <limits>
 #include <iomanip>
-using namespace std;;
+using namespace std;
 
 // Funcion para validar la opcion
 int restriccionOpcion(int min, int max) {
@@ -43,7 +43,7 @@ float validarDato() {
 }
 
 int main() {
-    int opcion, horasMesas[2],horasSillas[2], MaximaHoras[2]; ////// 0: Carpinteria; 1: Pintura 
+    int opcion, horasMesas[2],horasSillas[2], MaximaHoras[2],  precioMesaEntero,precioSillaEntero; ////// 0: Carpinteria; 1: Pintura 
     float precioMesa, precioSilla;
     bool estado=true;
     cout << "----------------------------------------------------------------"<<endl;
@@ -104,7 +104,10 @@ int main() {
             break;
         case 3:
             cout << "---Ingreso de la funcion de ganancia seleccionado.---" << endl;    
-            //            
+            precioMesaEntero = static_cast<int>(precioMesa + 0.5f);
+            precioSillaEntero = static_cast<int>(precioSilla + 0.5f);
+
+            cout<<"Funcion de ganancia: Maximizar Z= "<<precioMesaEntero<<"x1 + "<<precioSillaEntero<<"x2"<<endl;
             break;
         case 4:
             cout << "---Calculo de la solucion óptima seleccionado.---" << endl;
