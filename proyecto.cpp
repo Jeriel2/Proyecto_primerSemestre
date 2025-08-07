@@ -14,7 +14,7 @@ int restriccionOpcion(int min, int max) {
             cout << "Opcion invalida. No es un numero, intentelo nuevamente: ";
         } else if (numero < min || numero > max) {
             // Número fuera de rango
-            std::cout << "Opcion invalida. Fuera de rango, ingrese nuevamente: ";
+            cout << "Opcion invalida. Fuera de rango, ingrese nuevamente: ";
         } else {
             return numero;
         }
@@ -24,20 +24,19 @@ int restriccionOpcion(int min, int max) {
 float validarDato() {
     float numero;
     while (true) {
-        cin >> numero;
-
-        if (cin.fail()) { // No es un número
-            cin.clear(); // limpia el error
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // descarta entrada inválida
-            cout << "No se ingreso un numero. Intente otra vez: ";
-        }
-        else if (numero <= 0) { // No es positivo
-            cout << "El numero debe ser positivo. Intente otra vez: ";
-            cin.clear(); // limpia el error
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // descarta entrada inválida
-        }
-        else {
-            return numero; 
+        try {
+            cin >> numero;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                throw runtime_error("No se ingresó un número válido.");
+            }
+            if (numero <= 0) {
+                throw runtime_error("El número debe ser positivo.");
+            }
+            return numero;
+        } catch (const runtime_error& e) {
+            cout << e.what() << " Intente otra vez: ";
         }
     }
 }
@@ -57,7 +56,7 @@ int main() {
     cout << "1. Ingreso de precios de venta"<<endl;
     cout << "2. Ingreso de restricciones de produccion"<<endl;
     cout << "3. Ingreso de la funcion de ganancia (Funcion a maximizar)"<<endl;
-    cout << "4. Calculo de la socucion optima"<<endl;
+    cout << "4. Calculo de la solucion optima"<<endl;
     cout << "5. Solucion grafica del problema de optimizacion"<<endl;
     cout << "6. Salir del programa"<<endl;
     cout << "Ingrese la opcion que desea: ";
